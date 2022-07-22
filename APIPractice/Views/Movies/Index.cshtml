@@ -1,0 +1,68 @@
+﻿@model IEnumerable<APIPractice.Models.Movie>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">新規作成</a>
+</p>
+<form method="post" enctype="multipart/form-data" asp-controller="Movies" asp-action="UploadFile">
+    <P>取り込みをするファイルを指定して、［取込］ボタンを押してください。</P>
+    <P><INPUT type="file" name="userfile"> <input type="submit" value="取込" /></P>
+    <P>
+       
+    </P>
+</form>
+<div id="result"></div>
+<form asp-controller="Movies" asp-action="Index" method="get">
+    <p>
+        日付検索: <input type="text" name="SearchString" />
+        <input type="submit" value="検索" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
